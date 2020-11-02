@@ -1,0 +1,42 @@
+.container {
+
+    height: 100%;
+    display: grid;
+    grid-template: "cabecalho cabecalho "auto "checklist checklist"1fr "rodape rodape"auto / 1fr 1fr;
+
+    .cabecalho {
+        grid-area: cabecalho;
+    }
+
+    .cardapio {
+        background-color: green;
+        grid-area: cardapio;
+    }
+
+    .rodape {
+        color: white;
+        background-color: #333;
+        grid-area: rodape;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        * {
+            margin-left: 10px;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+}
+
+.btn-orange {
+    padding: 10px 20px;
+    color: #FFF;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+}

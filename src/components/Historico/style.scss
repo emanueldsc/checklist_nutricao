@@ -1,0 +1,66 @@
+.imgLabel {
+    width: 30px;
+    height: 30px;
+}
+
+table {
+    width: 90%;
+}
+
+.container-header-historico {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 20px auto 0;
+}
+
+.header-historico {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    align-items: center;
+}
+
+.center-text {
+    margin: 0 auto;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: center;
+
+    tr {
+        height: 50px;
+        border: 1px solid #fe7d1a;
+
+        &:nth-child(even) {
+            border-bottom: 1px solid salmon;
+        }
+        td>svg{
+            margin: 10px 0 0;
+        }
+    }
+}
+
+.border-1 {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.border-orange {
+    border-color: #fe7d1a;
+}
+
+
+.link-diario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #fe7d1a;
+    font-style: italic;
+}

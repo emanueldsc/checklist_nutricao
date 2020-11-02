@@ -1,0 +1,116 @@
+.checklist {
+    margin-bottom: 10px;
+    color: #fe7d1a;
+    grid-area: checklist;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    h2 {
+        text-align: center
+    }
+}
+
+.cups,
+.fruts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+
+    .cup,
+    .fruit {
+        flex: 1fr;
+        width: 4rem;
+        height: 4rem;
+        cursor: pointer;
+    }
+
+    .uncheck {
+        opacity: 0.1;
+    }
+
+    figure {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+    }
+}
+
+.exercises {
+
+    grid-gap: 0 15px;
+    gap: 0 15px;
+    padding: 0 15px;
+    display: grid;
+    grid-template: "i s n"auto "i t t"auto / auto 1fr 1fr;
+
+
+    #exerciseImg {
+        width: 4rem;
+        height: 4rem;
+        grid-area: i;
+    }
+
+    #exerciseSim {
+        grid-area: s;
+    }
+
+    #exerciseNao {
+        grid-area: n;
+    }
+
+    .input-group-tempo {
+        grid-area: t;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        spaw {
+            white-space: nowrap;
+        }
+
+        #exerciseTempo {
+            border-top: none;
+            border-right: none;
+            border-bottom: 2px solid #fe7d1a;
+            border-left: none;
+            color: #fe7d1a;
+            line-height: 1.5rem;
+            text-align: center;
+            width: 3rem;
+        }
+    }
+
+
+    .input-group span {
+        color: #fe7d1a;
+    }
+
+}
+
+.btnSalvar {
+    padding: 10px 50px;
+    font-size: 16px;
+    background-color: #fe7d1a;
+    border: none;
+    color: #FFF;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: .1s;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+        background-color: #ff6f00;
+    }
+}

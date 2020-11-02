@@ -1,0 +1,55 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .containerDay {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: .1s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    button {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .historico {
+        padding: 10px 20px;
+        background-color: #fe7d1a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: #da5e00
+        }
+    }
+
+    .btnSair {
+        color: #fe7d1a;
+        background-color: transparent;
+        border: none;
+
+        &:hover {
+            color: #f3a971
+        }
+    }
+}
