@@ -1,5 +1,5 @@
 {
-  "homepage": ".",
+  "homepage": "./docs",
   "name": "checklist_nutricao",
   "version": "0.1.0",
   "private": true,
