@@ -49,3 +49,6 @@ code {
 .btn-white:hover {
   background-color: #eee;
 }
+.text-left {
+  text-align: left;
+}

@@ -1,17 +1,25 @@
+.box-container-historico {
+    // max-width: 900px;
+    margin: 0 auto;
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .imgLabel {
     width: 30px;
     height: 30px;
 }
-
 table {
-    width: 90%;
+    width: 100%;
 }
 
 .container-header-historico {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 100%;
     margin: 20px auto 0;
 }
 

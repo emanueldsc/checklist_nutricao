@@ -10,6 +10,7 @@ import vegetables from '../../assets/vegetables.svg';
 import cup from '../../assets/watercup.svg';
 import { DataContext } from '../../context/data';
 import { Day } from '../../models/Day';
+import { Modal } from '../Modal';
 import './style.scss';
 
 const CheckList = () => {
@@ -22,6 +23,7 @@ const CheckList = () => {
     const [exercise, setExercise] = useState(false);
     const [exerciseTime, setExerciseTime] = useState(0);
     const { dateNow } = useContext(DataContext);
+    const [alert, setShowAlert] = useState(false);
 
     useEffect(() => {
         (function () {
@@ -46,9 +48,7 @@ const CheckList = () => {
                         } else {
                             setExercise(false);
                             setExerciseTime(0);
-
                         }
-
                     } else {
                         setWaterCups(new Array(12).fill(false));
                         setFruta(false);
@@ -87,25 +87,28 @@ const CheckList = () => {
                 }
             }
 
-
-
             const checklist = firebase.firestore().collection('ChekLists');
             if (did) {
                 checklist.doc(did).set(day)
                     .then(() => {
+                        setShowAlert(true);
                         console.info('Alteração realizada com sucesso!');
                     })
                     .catch(console.error)
-                    .finally(() => btnSalvar?.removeAttribute('disabled'));
+                    .finally(() => {
+                        btnSalvar?.removeAttribute('disabled');
+                    });
             } else {
                 checklist.add(day)
                     .then(docRef => {
                         setDid(docRef.id);
+                        setShowAlert(true);
                         console.info('Cadastro realizado com sucesso!');
                     })
                     .catch(console.error)
-                    .finally(() => btnSalvar?.removeAttribute('disabled'));
-
+                    .finally(() => {
+                        btnSalvar?.removeAttribute('disabled');
+                    });
             }
 
         }
@@ -156,6 +159,10 @@ const CheckList = () => {
             <button className="btnSalvar" id="btnSalvar" onClick={ salvar }>
                 Salvar
             </button>
+
+            <Modal isOpen={ alert } onClickClose={ () => setShowAlert(false) }>
+                Checkin Salvo com sucesso!
+            </Modal>
 
         </>
     )

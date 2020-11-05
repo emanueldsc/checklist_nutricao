@@ -113,4 +113,9 @@
         transform: scale(1.1);
         background-color: #ff6f00;
     }
+
+    &:disabled {
+        background-color: rosybrown;
+        cursor: not-allowe;
+    }
 }
