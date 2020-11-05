@@ -89,8 +89,8 @@ const Historico = () => {
                                             <td className="border-1 border-orange">{ date }</td>
                                             <td>{ waterCups }</td>
                                             <td>{ consumedFruit ? <FaCheck size={ 20 } color="#5cb85c" /> : <ImCross size={ 20 } color="#d9534f" /> }</td>
-                                            <td>{ consumedLegumen ? <FaCheck size={ 20 } color="#5cb85c" /> : <ImCross size={ 20 } color="#d9534f" /> }</td>
                                             <td>{ consumedVegetable ? <FaCheck size={ 20 } color="#5cb85c" /> : <ImCross size={ 20 } color="#d9534f" /> }</td>
+                                            <td>{ consumedLegumen ? <FaCheck size={ 20 } color="#5cb85c" /> : <ImCross size={ 20 } color="#d9534f" /> }</td>
                                             <td>
                                                 <h3 className={ exerciseTime > 0 ? 'text-green' : 'text-red' }>{ exerciseTime }</h3>
                                             </td>
