@@ -5,23 +5,30 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 import { useHistory } from 'react-router-dom';
 import './style.scss';
 
+import { Splash } from '../Modal';
+
 
 const Login = () => {
     const [login, setLogin] = useState('');
     const [passwd, setPasswd] = useState('');
+    const [splash, setSplahs] = useState(false);
 
     const history = useHistory();
 
     const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+        setSplahs(true);
         evt.preventDefault();
         firebase.auth().signInWithEmailAndPassword(login, passwd).then(u => {
+            setSplahs(false);
             history.push('/');
         }).catch(console.error);
     }
 
     const handleRegister = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        setSplahs(true);
         evt.preventDefault();
         firebase.auth().createUserWithEmailAndPassword(login, passwd).then(user => {
+            setSplahs(false);
             history.push('/');
         }).catch(console.error);
     }
@@ -44,6 +51,8 @@ const Login = () => {
             <span className="googlelogin">
                 login com <AiFillGoogleCircle size={ 24 } className="pointer" color="#fe7d1a" />
             </span>
+
+            <Splash isOpen={ splash } />
 
         </div>
     );

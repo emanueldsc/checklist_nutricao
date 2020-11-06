@@ -10,7 +10,7 @@ import vegetables from '../../assets/vegetables.svg';
 import cup from '../../assets/watercup.svg';
 import { DataContext } from '../../context/data';
 import { Day } from '../../models/Day';
-import { Modal } from '../Modal';
+import { Modal, Splash } from '../Modal';
 import './style.scss';
 
 const CheckList = () => {
@@ -24,9 +24,11 @@ const CheckList = () => {
     const [exerciseTime, setExerciseTime] = useState(0);
     const { dateNow } = useContext(DataContext);
     const [alert, setShowAlert] = useState(false);
+    const [splash, setSplash] = useState(false);
 
     useEffect(() => {
         (function () {
+            setSplash(true);
             setDid('');
             const uid = firebase.auth().currentUser?.uid;
             const dt = dateNow;
@@ -57,6 +59,7 @@ const CheckList = () => {
                         setExercise(false);
                         setExerciseTime(0);
                     }
+                    setSplash(false);
                 })
                 .catch(console.error);
         })()
@@ -70,6 +73,7 @@ const CheckList = () => {
     }
 
     const salvar = () => {
+        setSplash(true);
         const btnSalvar = document.getElementById('btnSalvar');
         btnSalvar?.setAttribute('disabled', 'disabled');
         const waterCounts = waterCups.reduce((count, cup) => cup ? count + 1 : count, 0);
@@ -96,6 +100,7 @@ const CheckList = () => {
                     })
                     .catch(console.error)
                     .finally(() => {
+                        setSplash(false);
                         btnSalvar?.removeAttribute('disabled');
                     });
             } else {
@@ -107,6 +112,7 @@ const CheckList = () => {
                     })
                     .catch(console.error)
                     .finally(() => {
+                        setSplash(false);
                         btnSalvar?.removeAttribute('disabled');
                     });
             }
@@ -163,6 +169,8 @@ const CheckList = () => {
             <Modal isOpen={ alert } onClickClose={ () => setShowAlert(false) }>
                 Checkin Salvo com sucesso!
             </Modal>
+
+            <Splash isOpen={ splash } />
 
         </>
     )
