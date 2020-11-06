@@ -96,8 +96,8 @@ const Historico = () => {
                                             </td>
                                             <td className="border-1 border-orange">
                                                 <span className="link-diario">
-                                                    Visualizar di&aacute;rio
-                                        </span>
+                                                    di&aacute;rio
+                                                </span>
                                             </td>
                                         </tr>
                                     </tbody>
