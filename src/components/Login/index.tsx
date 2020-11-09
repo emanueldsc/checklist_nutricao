@@ -33,6 +33,16 @@ const Login = () => {
         }).catch(console.error);
     }
 
+    const loginWithGoogle = (evt: React.FormEvent<HTMLButtonElement>) => {
+        setSplahs(true);
+        evt.preventDefault();
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(u => {
+            setSplahs(false);
+            history.push('/');
+        }).catch(console.error);
+    }
+
     return (
         <div className="login-container">
             <h1 className="text-orange">Login / Registre-se</h1>
@@ -41,16 +51,16 @@ const Login = () => {
                 <input className="field" type="email" id="login" placeholder="Login" onChange={ e => setLogin(e.target.value) } />
                 <input className="field" type="password" id="passwd" placeholder="Senha" onChange={ e => setPasswd(e.target.value) } />
                 <div className="btnBox">
-                    <button className="btn-orange pointer" onClick={ handleRegister }>Registrar</button>
+                    <button type="button" className="btn-orange pointer" onClick={ handleRegister }>Registrar</button>
                     <input type="submit" className="btn-orange pointer" value="Login" />
                 </div>
             </form>
 
             <hr className="separator" />
 
-            <span className="googlelogin">
+            <button className="googlelogin" type="button" onClick={ loginWithGoogle }> 
                 login com <AiFillGoogleCircle size={ 24 } className="pointer" color="#fe7d1a" />
-            </span>
+            </button>
 
             <Splash isOpen={ splash } />
 
