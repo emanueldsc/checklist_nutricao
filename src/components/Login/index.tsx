@@ -5,13 +5,15 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 import { useHistory } from 'react-router-dom';
 import './style.scss';
 
-import { Splash } from '../Modal';
+import { Modal, Splash } from '../Modal';
 
 
 const Login = () => {
     const [login, setLogin] = useState('');
     const [passwd, setPasswd] = useState('');
     const [splash, setSplahs] = useState(false);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [msgErro, setMsgErro] = useState('');
 
     const history = useHistory();
 
@@ -19,28 +21,28 @@ const Login = () => {
         setSplahs(true);
         evt.preventDefault();
         firebase.auth().signInWithEmailAndPassword(login, passwd).then(u => {
-            setSplahs(false);
             history.push('/');
-        }).catch(console.error);
+        }).catch(err => {
+            setMsgErro(err);
+            setIsOpenModal(true);
+            console.error(err);
+        }).finally(() => {
+            setSplahs(false);
+        });
     }
 
     const handleRegister = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setSplahs(true);
         evt.preventDefault();
         firebase.auth().createUserWithEmailAndPassword(login, passwd).then(user => {
-            setSplahs(false);
             history.push('/');
-        }).catch(console.error);
-    }
-
-    const loginWithGoogle = (evt: React.FormEvent<HTMLButtonElement>) => {
-        setSplahs(true);
-        evt.preventDefault();
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(u => {
+        }).catch(err => {
+            setMsgErro(err);
+            setIsOpenModal(true);
+            console.error(err);
+        }).finally(() => {
             setSplahs(false);
-            history.push('/');
-        }).catch(console.error);
+        });
     }
 
     return (
@@ -58,11 +60,15 @@ const Login = () => {
 
             <hr className="separator" />
 
-            <button className="googlelogin" type="button" onClick={ loginWithGoogle }> 
+            <button className="googlelogin" type="button">
                 login com <AiFillGoogleCircle size={ 24 } className="pointer" color="#fe7d1a" />
             </button>
 
             <Splash isOpen={ splash } />
+
+            <Modal isOpen={ isOpenModal } onClickClose={ () => setIsOpenModal(false) }>
+                { msgErro }
+            </Modal>
 
         </div>
     );
