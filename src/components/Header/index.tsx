@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { Link, useHistory } from 'react-router-dom';
 import { DataContext } from '../../context/data';
-import { Splash } from '../Modal';
 import './style.scss';
 
 const Header = () => {

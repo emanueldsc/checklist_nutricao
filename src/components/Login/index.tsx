@@ -1,12 +1,11 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import React, { useState } from 'react';
-import { AiFillGoogleCircle } from 'react-icons/ai';
 import { useHistory } from 'react-router-dom';
+import { Modal, Splash } from '../Modal';
 import './style.scss';
 
-import { Modal, Splash } from '../Modal';
-
+firebase.auth().languageCode = 'pt';
 
 const Login = () => {
     const [login, setLogin] = useState('');
@@ -20,10 +19,11 @@ const Login = () => {
     const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
         setSplahs(true);
         evt.preventDefault();
+
         firebase.auth().signInWithEmailAndPassword(login, passwd).then(u => {
             history.push('/');
         }).catch(err => {
-            setMsgErro(err);
+            setMsgErro(errMsg(err));
             setIsOpenModal(true);
             console.error(err);
         }).finally(() => {
@@ -36,13 +36,36 @@ const Login = () => {
         evt.preventDefault();
         firebase.auth().createUserWithEmailAndPassword(login, passwd).then(user => {
             history.push('/');
-        }).catch(err => {
-            setMsgErro(err);
+        }).catch((err: any) => {
+            setMsgErro(errMsg(err));
             setIsOpenModal(true);
             console.error(err);
         }).finally(() => {
             setSplahs(false);
         });
+    }
+
+    const restaurarSenha = () => {
+        setSplahs(true);
+        firebase.auth().sendPasswordResetEmail(login).then(() => {
+            setMsgErro(`Um email de alteração de senha foi enviado para ${login}`);
+            setIsOpenModal(true);
+        }).catch(err => {
+            setMsgErro(`Erro com o email Informado. Por favor informe um email no campo login.`);
+            setIsOpenModal(true);
+        }).finally(() => {
+            setSplahs(false);
+        });
+    };
+
+    function errMsg(err: { code: string }): string {
+        switch (err.code) {
+            case "auth/too-many-requests":
+                return 'O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login malsucedidas. Você pode restaurá-la imediatamente redefinindo sua senha ou pode tentar novamente mais tarde.';
+            case "auth/wrong-password":
+                return 'A senha é inválida ou o usuário não possui uma senha.';
+        }
+        return '';
     }
 
     return (
@@ -60,8 +83,8 @@ const Login = () => {
 
             <hr className="separator" />
 
-            <button className="googlelogin" type="button">
-                login com <AiFillGoogleCircle size={ 24 } className="pointer" color="#fe7d1a" />
+            <button className="googlelogin" type="button" onClick={ restaurarSenha }>
+                restaurar senha
             </button>
 
             <Splash isOpen={ splash } />

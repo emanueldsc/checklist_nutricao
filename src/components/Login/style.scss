@@ -50,5 +50,10 @@
         gap: 10px;
         border: none;
         background-color: transparent;
+        &:hover{
+            text-decoration: underline;
+            color: #fe7d1a;
+            cursor: pointer;
+        }
     }
 }
